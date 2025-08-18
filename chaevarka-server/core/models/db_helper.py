@@ -24,6 +24,6 @@ class DatabaseHelper:
         await self.engine.dispose()
 
 db_helper = DatabaseHelper(
-    url=settings.db.url,
+    url=str(settings.db.url),
     echo=settings.db.echo,
 )
