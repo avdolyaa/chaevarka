@@ -1,19 +1,21 @@
 # Chaevarka
+<div align="center">
 ## Installation
+</div>
 
-git clone https://github.com/avdolya/chaevarka.git
+- git clone https://github.com/avdolya/chaevarka.git
 
-cd chaevarka
+- cd chaevarka
 
-poetry install
+- poetry install
 
-poetry shell
+- poetry shell
 
-docker-compose up -d
+- docker-compose up -d
 
-### Create env file with TEA_RUN__HOST, TEA_RUN__PORT=8000, TEA_DB__URL
+- Create env file with TEA_RUN__HOST, TEA_RUN__PORT=8000, TEA_DB__URL
 
-## Docs
+## Documentation
 
 Swagger: http://localhost:8000/docs
 
