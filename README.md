@@ -18,7 +18,7 @@ docker-compose up -d
 Swagger: http://localhost:8000/docs
 
 ## Structure
-'''bash
+``` bush
 chaevarka/
 ├── chaevarka-server/          # Основное приложение
 │   ├── api/
@@ -46,7 +46,7 @@ chaevarka/
 ├── poetry.lock               # Lock-файл зависимостей Poetry
 ├── pyproject.toml            # Конфигурация Poetry
 └── README.md                 # Документация
-'''
+```
 ## API_ENDPOINTS
 
 GET /api/v1/devices
