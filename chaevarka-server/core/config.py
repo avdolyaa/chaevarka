@@ -15,6 +15,9 @@ class DatabaseConfig(BaseModel):
     url: PostgresDsn
     echo: bool = False
 
+class ApiConfig(BaseModel):
+    prefix: str = "/api/v1"
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -23,5 +26,6 @@ class Settings(BaseSettings):
     )
     run: RunConfig
     db: DatabaseConfig
+    api: ApiConfig = ApiConfig()
 
 settings = Settings()
