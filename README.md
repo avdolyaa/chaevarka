@@ -3,11 +3,8 @@
 git clone https://github.com/avdolya/chaevarka.git
 
 cd chaevarka
-
 poetry install
-
 poetry shell
-
 docker-compose up -d
 
 ### Create env file with TEA_RUN__HOST, TEA_RUN__PORT=8000, TEA_DB__URL
