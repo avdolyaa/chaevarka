@@ -1,7 +1,5 @@
 # Chaevarka
-<div align="center">
 ## Installation
-</div>
 
 - git clone https://github.com/avdolya/chaevarka.git
 
