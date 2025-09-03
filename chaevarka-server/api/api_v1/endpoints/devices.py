@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from api.api_v1.schemas.device import DeviceIP
 from core.config import settings
@@ -12,10 +12,12 @@ router = APIRouter(
 )
 
 
-@router.get("", response_model=DeviceIP)
-async def get_ip(session: AsyncSession = Depends(db_helper.session_getter)):
-    ip = await get_ip_address(session=session)
-    return DeviceIP(ip_address=ip)
+@router.get("/{device_id}", response_model=DeviceIP)
+async def get_ip(device_id: str, session: AsyncSession = Depends(db_helper.session_getter)):
+    device = await get_ip_address(session=session, device_id=device_id)
+    if not device:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Device not found")
+    return DeviceIP(ip_address=device.ip_address, device_id=device.device_id)
 
 
 @router.post("", response_model=DeviceIP)
@@ -23,5 +25,5 @@ async def register_device(
     device_ip: DeviceIP,
     session: AsyncSession = Depends(db_helper.session_getter)
 ):
-    device = await update_device_ip(session, device_ip.ip_address)
-    return DeviceIP(ip_address=device.ip_address)
+    device = await update_device_ip(session, device_ip.ip_address, device_ip.device_id)
+    return device
