@@ -47,8 +47,10 @@ chaevarka/
 ├── pyproject.toml            # Конфигурация Poetry
 └── README.md                 # Документация
 ```
-## API_ENDPOINTS
+## API Endpoints
 
-GET /api/v1/devices
+### GET /api/v1/devices/{device_id}
+Получает IP-адрес устройства по его уникальному идентификатору (device_id).
 
-POST /api/v1/devices
+### POST /api/v1/devices
+Регистрирует новое устройство или обновляет IP-адрес существующего.
