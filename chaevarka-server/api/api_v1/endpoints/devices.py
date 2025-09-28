@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/{device_id}", response_model=DeviceIP)
+@router.get("/devices/{device_id}", response_model=DeviceIP)
 async def get_ip(device_id: str, session: AsyncSession = Depends(db_helper.session_getter)):
     device = await get_ip_address(session=session, device_id=device_id)
     if not device:
@@ -20,10 +20,10 @@ async def get_ip(device_id: str, session: AsyncSession = Depends(db_helper.sessi
     return DeviceIP(ip_address=device.ip_address, device_id=device.device_id)
 
 
-@router.post("", response_model=DeviceIP)
+@router.post("/devices", response_model=DeviceIP)
 async def register_device(
     device_ip: DeviceIP,
     session: AsyncSession = Depends(db_helper.session_getter)
 ):
-    device = await update_device_ip(session, device_ip.ip_address, device_ip.device_id)
+    device = await update_device_ip(session=session, ip_address=device_ip.ip_address, device_id=device_ip.device_id)
     return device

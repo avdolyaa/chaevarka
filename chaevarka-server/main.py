@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from core.config import settings
 from core.models.db_helper import db_helper
 from api.api_v1.endpoints.devices import router as devices_router
-
+from api.api_v1.endpoints.tea_make import router as tea_make_router
 
 
 
@@ -16,6 +16,8 @@ async def lifespan(app: FastAPI):
 main_app = FastAPI(lifespan=lifespan)
 
 main_app.include_router(devices_router)
+main_app.include_router(tea_make_router)
+
 
 if __name__  == "__main__":
     print("DB URL:", settings.db.url)
