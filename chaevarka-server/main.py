@@ -20,7 +20,9 @@ main_app.include_router(tea_make_router)
 
 
 if __name__  == "__main__":
-    print("DB URL:", settings.db.url)
+    # убртаь reload когда менем код он автоматически перезапускает сервер
+    # --reload постоянно отслеживает изменения в файлах увел нагрузку на кпу
+
     uvicorn.run(
         "main:main_app",
         host=settings.run.host,
