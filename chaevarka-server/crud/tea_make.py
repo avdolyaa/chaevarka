@@ -5,9 +5,14 @@ from starlette import status
 
 from api.api_v1.schemas.tea_make import TeaMakeCreate
 from core.models import Tea_make
+from core.models import Device
+
 
 
 async def make_tea(session: AsyncSession, tea_data: TeaMakeCreate) -> Tea_make:
+    device_exists = await session.execute(select(Device).filter(Device.device_id == tea_data.device_id))
+    if not device_exists.first():
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="device wasn't found")
     tea_make = Tea_make(**tea_data.model_dump())
     session.add(tea_make)
     await session.commit()
