@@ -13,6 +13,15 @@
 
 - Create env file with TEA_RUN__HOST, TEA_RUN__PORT, TEA_DB__URL
 
+## Installation (Вариант с venv и requirements)
+   - git clone https://github.com/avdolya/chaevarka.git
+   - cd chaevarka 
+   - python -m venv .venv 
+   - source .venv/bin/activate 
+   - pip install --upgrade pip 
+   - pip install -r requirements.txt 
+   - docker-compose up -d
+   - Create env file with TEA_RUN__HOST, TEA_RUN__PORT, TEA_DB__URL
 ## Documentation
 
 Swagger: http://localhost:8000/docs
@@ -118,4 +127,4 @@ Swagger: http://localhost:8000/docs
 
 5. Получения рез-та в приложении.
    - Приложение стучится на сервер, смотрит выполнен ли заказ с order_id. 
-   - Чета со стороны прилы типа удалить ордер из хранилища 
+   - При получении статуса 'completed' приложение удаляет заказ из локального хранилища
