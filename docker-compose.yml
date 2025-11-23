@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   pg:
-    image: postgres
+    image: postgres:latest
     environment:
       POSTGRES_DB: "chaevarka"
       POSTGRES_USER: "user"
@@ -8,6 +10,19 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
-volumes:
-  db_data:
+      - ./db_data:/var/lib/postgresql/data
+  
+  api:
+    build:
+      context: ./chaevarka-server
+    ports:
+      - "8000:8000"
+    container_name: api
+    environment:
+      - TEA_RUN__HOST
+      - TEA_RUN__PORT
+      - TEA_DB__URL
+      - TEA_DB__ECHO
+    volumes:
+      - ./chaevarka-server:/app
+  
