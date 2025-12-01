@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from api.api_v1.schemas.device import DeviceIP
 from core.config import settings
@@ -27,3 +28,14 @@ async def register_device(
 ):
     device = await update_device_ip(session=session, ip_address=device_ip.ip_address, device_id=device_ip.device_id)
     return device
+
+@router.delete("/devices")
+async def clear_all_devices(session: AsyncSession = Depends(db_helper.session_getter)):
+    try:
+        await session.execute(text("DELETE FROM devices"))
+        await session.commit()
+        return {"message": "Deleted all devices"}
+    except Exception as e:
+        await session.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+

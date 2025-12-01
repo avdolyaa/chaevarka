@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Request, HTTPException
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
@@ -53,3 +54,15 @@ async def get_order_status(
     if not order:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
     return {"status": order.status, "order_id": order.id}
+
+
+@router.delete("/tea-make")
+async def clear_all_orders(session: AsyncSession = Depends(db_helper.session_getter)):
+    try:
+        await session.execute(text("DELETE FROM tea_make"))
+        await session.commit()
+        return {"message": "Deleted tea orders"}
+    except Exception as e:
+        await session.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
