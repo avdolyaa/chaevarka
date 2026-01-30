@@ -2,22 +2,25 @@ version: '3.8'
 
 services:
   pg:
-    image: postgres:latest
+    image: postgres:16
+    restart: unless-stopped
     environment:
       POSTGRES_DB: "chaevarka"
       POSTGRES_USER: "user"
       POSTGRES_PASSWORD: "password"
-    ports:
-      - "5432:5432"
     volumes:
       - ./db_data:/var/lib/postgresql/data
-  
+    mem_limit: 512m
+    networks:
+      - backend_net
+
   api:
     build:
       context: ./chaevarka-server
     ports:
       - "8000:8000"
     container_name: api
+    restart: unless-stopped
     environment:
       - TEA_RUN__HOST
       - TEA_RUN__PORT
@@ -25,4 +28,9 @@ services:
       - TEA_DB__ECHO
     volumes:
       - ./chaevarka-server:/app
-  
+    networks:
+      - backend_net
+
+networks:
+  backend_net:
+    driver: bridge
