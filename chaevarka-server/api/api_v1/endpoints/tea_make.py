@@ -40,7 +40,7 @@ async def tea_make_ready(
    tea_make = await post_tea_ready(session=session, order_id=order_id)
    if not tea_make:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
-   if tea_make.status != 'completed':
+   if tea_make.status != 'in_progress':
        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Order not in progress")
    return {"status": "completed", "order_id": tea_make.id}
 
