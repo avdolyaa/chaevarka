@@ -1,6 +1,17 @@
 from datetime import datetime
 from typing import Annotated
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+from enum import Enum
+
+class TeaStatus(str, Enum):
+   WAITING = "waiting"
+   IN_PROGRESS = "in_progress"
+   BOILING = "boiling"
+   DOSING = "dosing"
+   BREWING = "brewing"
+   COMPLETED = "completed"
+   FAILED = "failed"
+
 
 class TeaMakeCreate(BaseModel):
    device_id: str
@@ -13,8 +24,18 @@ class TeaMakeCreate(BaseModel):
 
 class TeaMakeResponse(TeaMakeCreate):
    id: int
-   status: str
+   status: TeaStatus
    created_at: datetime
 
    class Config:
        from_attributes = True
+
+
+class TeaStatusUpdate(BaseModel):
+   status: TeaStatus
+   @field_validator('status', mode='before')
+   @classmethod
+   def lowercase_status(cls, v):
+      if isinstance(v, str):
+         return v.lower()
+      return v

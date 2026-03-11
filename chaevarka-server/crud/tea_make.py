@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from api.api_v1.schemas.tea_make import TeaMakeCreate
+from api.api_v1.schemas.tea_make import TeaMakeCreate, TeaStatus
 from core.models import Tea_make
 from core.models import Device
 
@@ -21,11 +21,6 @@ async def make_tea(session: AsyncSession, tea_data: TeaMakeCreate) -> Tea_make:
 
 async def get_tea(session: AsyncSession, device_id: str) -> Tea_make | None:
     order = await session.scalar(select(Tea_make).where(Tea_make.device_id == device_id).where(Tea_make.status == 'waiting').order_by(Tea_make.id))
-    if order:
-        order.status = 'in_progress'
-        session.add(order)
-        await session.commit()
-        await session.refresh(order)
     return order
 
 async def post_tea_ready(session: AsyncSession, order_id: int) -> Tea_make | None:
@@ -39,4 +34,14 @@ async def post_tea_ready(session: AsyncSession, order_id: int) -> Tea_make | Non
 
 async def get_tea_ready(session: AsyncSession, order_id: int) -> Tea_make:
     order = await session.scalar(select(Tea_make).where(Tea_make.id == order_id))
+    return order
+
+
+async def update_tea_status(session: AsyncSession, order_id: int, new_status: TeaStatus) -> Tea_make | None:
+    order = await session.get(Tea_make, order_id)
+    if order:
+        order.status = new_status
+        session.add(order)
+        await session.commit()
+        await session.refresh(order)
     return order
