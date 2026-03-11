@@ -24,12 +24,12 @@ async def test_data(session: AsyncSession = Depends(db_helper.session_getter)):
         for i in range(10):
             order = Tea_make(
                 device_id=random.choice(["chvrk_1", "chvrk_2", "chvrk_3"]),
-                water=random.randint(200, 400),
-                temperature=random.choice([80, 85, 90, 95]),
-                sugar=random.randint(0, 2),
-                type=random.randint(1, 5),
-                time=random.randint(180, 300),
-                tea_cnt=random.randint(1, 2),
+                water=random.randint(50, 300),
+                temperature=random.randint(70, 100),
+                sugar=random.randint(0, 5),
+                type=random.randint(0, 6),
+                time=random.randint(0, 5),
+                tea_cnt=random.randint(1, 10),
                 status=random.choice(["waiting", "in_progress", "completed"]),
                 created_at=datetime.utcnow() - timedelta(hours=random.randint(1, 24))
             )
