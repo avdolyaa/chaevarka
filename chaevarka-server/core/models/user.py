@@ -7,4 +7,4 @@ class User(Base, SQLAlchemyBaseUserTable[int]):
 
     @classmethod
     def get_db(cls, session: "AsyncSession"):
-        return SQLAlchemyUserDatabase(session, User)
+        return SQLAlchemyUserDatabase(session, cls)
