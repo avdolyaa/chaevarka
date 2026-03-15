@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
-    reset_password_token_secret = settings.access_token.reset_pssword_token_secret
+    reset_password_token_secret = settings.access_token.reset_password_token_secret
     verification_token_secret = settings.access_token.verification_token_secret
 
     async def on_after_register(self, user: User, request: Request | None = None):
