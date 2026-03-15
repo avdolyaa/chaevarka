@@ -9,7 +9,7 @@ from api.api_v1.endpoints.devices import router as devices_router
 from api.api_v1.endpoints.tea_make import router as tea_make_router
 from api.api_v1.endpoints.health import router as health_router
 from api.api_v1.endpoints.test import router as test_router
-from api.api_v1.endpoints.test import router as auth_router
+from api.api_v1.endpoints.auth import router as auth_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
