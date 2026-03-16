@@ -11,4 +11,4 @@ from .base import Base
 from .tea_make import Tea_make
 from .device import Device
 from .user import User
-from .access_tocken import AccessToken
+from .access_token import AccessToken

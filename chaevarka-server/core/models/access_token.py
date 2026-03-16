@@ -5,9 +5,13 @@ from fastapi_users_db_sqlalchemy.access_token import (
 from sqlalchemy import Integer, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column
-from .base import Base
 
-class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):
+from core.models import Base
+
+
+class AccessToken(SQLAlchemyBaseAccessTokenTable[int], Base):
+    __tablename__ = "accesstoken"
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(
         Integer,
         ForeignKey("users.id", ondelete="cascade"),
