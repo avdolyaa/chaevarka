@@ -11,11 +11,21 @@ router = APIRouter(
 )
 
 router.include_router(
-    router=fastapi_users.get_auth_router(authentication_backend),
+    router=fastapi_users.get_auth_router(authentication_backend, requires_verification=True),
     prefix="/auth/jwt",
 )
 
 router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+)
+
+router.include_router(
+    router=fastapi_users.get_verify_router(UserRead),
+    prefix="/auth",
+)
+
+router.include_router(
+    fastapi_users.get_reset_password_router(),
     prefix="/auth",
 )

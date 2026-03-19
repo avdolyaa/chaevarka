@@ -21,6 +21,15 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             user.id,
         )
 
+    async def on_after_request_verify(
+        self, user: User, token: str, request: Request | None = None
+    ):
+        log.warning(
+            "Verification requested for user %r. Verification token: %r",
+            user.id,
+            token,
+        )
+
     async def on_after_forgot_password(
         self, user: User, token: str, request: Request | None = None
     ):
@@ -30,12 +39,5 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             token,
         )
 
-    async def on_after_request_verify(
-        self, user: User, token: str, request: Request | None = None
-    ):
-        log.warning(
-            "Verification requested for user %r. Verification token: %r",
-            user.id,
-            token,
-        )
+
 
