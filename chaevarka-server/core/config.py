@@ -33,5 +33,7 @@ class Settings(BaseSettings):
     db: DatabaseConfig
     api: ApiConfig = ApiConfig()
     access_token: AccessToken
+    superuser_email: str
+    superuser_password: str
 
 settings = Settings()
