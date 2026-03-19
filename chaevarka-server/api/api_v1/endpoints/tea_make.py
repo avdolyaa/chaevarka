@@ -3,6 +3,8 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 from datetime import datetime
+
+from api.dependencies.authentication.auth import current_active_user, current_superuser
 from core.config import settings
 from api.api_v1.schemas.tea_make import TeaMakeCreate, TeaMakeResponse, TeaStatusUpdate
 from core.models import db_helper, Tea_make, Device
@@ -10,7 +12,8 @@ from crud.tea_make import make_tea, get_tea, post_tea_ready, get_tea_ready, upda
 from sqlalchemy import select
 router = APIRouter(
    prefix=settings.api.prefix,
-   tags=["Tea_make"]
+   tags=["Tea_make"],
+   dependencies=[Depends(current_active_user)]
 )
 
 async def update_device_online(session: AsyncSession, device_id: str):
@@ -66,7 +69,7 @@ async def get_order_status(
     return {"status": order.status, "order_id": order.id}
 
 
-@router.delete("/tea-make")
+@router.delete("/tea-make", dependencies=[Depends(current_superuser)])
 async def clear_all_orders(session: AsyncSession = Depends(db_helper.session_getter)):
     try:
         await session.execute(text("DELETE FROM tea_make"))

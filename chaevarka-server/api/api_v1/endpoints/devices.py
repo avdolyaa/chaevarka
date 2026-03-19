@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from api.api_v1.schemas.device import DeviceResponse, DeviceCreate
+from api.dependencies.authentication.auth import current_active_user, current_superuser
 from core.config import settings
 from core.models import db_helper
 from crud.devices import get_information, update_device_ip
@@ -9,7 +10,8 @@ from crud.devices import get_information, update_device_ip
 
 router = APIRouter(
     prefix=settings.api.prefix,
-    tags=["Devices"]
+    tags=["Devices"],
+    dependencies=[Depends(current_active_user)]
 )
 
 
@@ -30,7 +32,7 @@ async def register_device(
     return device
 
 
-@router.delete("/devices")
+@router.delete("/devices", dependencies=[Depends(current_superuser)])
 async def clear_all_devices(session: AsyncSession = Depends(db_helper.session_getter)):
     try:
         await session.execute(text("DELETE FROM devices"))
