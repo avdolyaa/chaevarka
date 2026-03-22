@@ -45,3 +45,15 @@ async def update_tea_status(session: AsyncSession, order_id: int, new_status: Te
         await session.commit()
         await session.refresh(order)
     return order
+
+
+async def cancel_tea_order(session: AsyncSession, order_id: int) -> Tea_make | None:
+    order = await session.get(Tea_make, order_id)
+    if order:
+        if order.status in [TeaStatus.COMPLETED, TeaStatus.FAILED]:
+            return order
+        order.status = TeaStatus.CANCELLED
+        session.add(order)
+        await session.commit()
+        await session.refresh(order)
+    return order

@@ -11,6 +11,7 @@ class TeaStatus(str, Enum):
    BREWING = "brewing"
    COMPLETED = "completed"
    FAILED = "failed"
+   CANCELLED = "cancelled"
 
 
 class TeaMakeCreate(BaseModel):

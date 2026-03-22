@@ -6,9 +6,9 @@ from datetime import datetime
 
 from api.dependencies.authentication.auth import current_active_user, current_superuser
 from core.config import settings
-from api.api_v1.schemas.tea_make import TeaMakeCreate, TeaMakeResponse, TeaStatusUpdate
+from api.api_v1.schemas.tea_make import TeaMakeCreate, TeaMakeResponse, TeaStatusUpdate, TeaStatus
 from core.models import db_helper, Tea_make, Device
-from crud.tea_make import make_tea, get_tea, post_tea_ready, get_tea_ready, update_tea_status
+from crud.tea_make import make_tea, get_tea, post_tea_ready, get_tea_ready, update_tea_status, cancel_tea_order
 from sqlalchemy import select
 router = APIRouter(
    prefix=settings.api.prefix,
@@ -113,3 +113,28 @@ async def get_order_by_id(
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return order
+
+
+@router.post("/tea-make/{order_id}/cancel", response_model=dict)
+async def cancel_tea(
+    order_id: int,
+    session: AsyncSession = Depends(db_helper.session_getter)
+):
+    order = await cancel_tea_order(session=session, order_id=order_id)
+    if not order:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Order not found"
+        )
+
+    if order.status == TeaStatus.COMPLETED:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot cancel already completed order"
+        )
+
+    return {
+        "status": "success",
+        "order_id": order.id,
+        "message": f"Order status is now {order.status}"
+    }
