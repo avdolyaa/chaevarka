@@ -8,7 +8,7 @@ from api.dependencies.authentication.auth import current_active_user, current_su
 from core.config import settings
 from api.api_v1.schemas.tea_make import TeaMakeCreate, TeaMakeResponse, TeaStatusUpdate, TeaStatus
 from core.models import db_helper, Tea_make, Device
-from crud.tea_make import make_tea, get_tea, post_tea_ready, get_tea_ready, update_tea_status, cancel_tea_order
+from crud.tea_make import make_tea, get_tea, post_tea_ready, get_tea_ready, update_tea_status, cancel_tea_order, dispense_tea
 from sqlalchemy import select
 router = APIRouter(
    prefix=settings.api.prefix,
@@ -137,4 +137,24 @@ async def cancel_tea(
         "status": "success",
         "order_id": order.id,
         "message": f"Order status is now {order.status}"
+    }
+
+
+@router.post("/{order_id}/dispense", response_model=dict)
+async def dispense_tea_portion(
+        order_id: int,
+        session: AsyncSession = Depends(db_helper.session_getter)
+):
+    result = await dispense_tea(session=session, order_id=order_id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Order not found")
+    if result == "wrong_status":
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot dispense. Order is not ready (need: ready_to_dispense)"
+        )
+    return {
+        "status": "success",
+        "order_id": result.id,
+        "message": f"Command sent: pour {result.water_for_cup}ml"
     }

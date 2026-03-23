@@ -57,3 +57,15 @@ async def cancel_tea_order(session: AsyncSession, order_id: int) -> Tea_make | N
         await session.commit()
         await session.refresh(order)
     return order
+
+async def dispense_tea(session: AsyncSession, order_id: int) -> Tea_make | str | None:
+    order = await session.get(Tea_make, order_id)
+    if not order:
+        return None
+    if order.status != TeaStatus.READY_TO_DISPENSE:
+        return "wrong_status"
+    order.status = TeaStatus.DOSING
+    session.add(order)
+    await session.commit()
+    await session.refresh(order)
+    return order
