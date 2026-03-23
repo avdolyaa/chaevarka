@@ -5,11 +5,13 @@ __all__= (
     "Tea_make",
     "User",
     "AccessToken",
-    "Firmware"
+    "Firmware",
+    "Drum_config",
 )
 from .db_helper import db_helper
 from .base import Base
 from .tea_make import Tea_make
+from .tea_make import Drum_config
 from .device import Device
 from .user import User
 from .firmware import Firmware
