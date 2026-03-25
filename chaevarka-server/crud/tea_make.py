@@ -23,14 +23,6 @@ async def get_tea(session: AsyncSession, device_id: str) -> Tea_make | None:
     order = await session.scalar(select(Tea_make).where(Tea_make.device_id == device_id).where(Tea_make.status == 'waiting').order_by(Tea_make.id))
     return order
 
-async def post_tea_ready(session: AsyncSession, order_id: int) -> Tea_make | None:
-    order_ready = await session.scalar(select(Tea_make).where(Tea_make.id == order_id))
-    if order_ready:
-        order_ready.status = 'completed'
-        session.add(order_ready)
-        await session.commit()
-        await session.refresh(order_ready)
-    return order_ready
 
 async def get_tea_ready(session: AsyncSession, order_id: int) -> Tea_make:
     order = await session.scalar(select(Tea_make).where(Tea_make.id == order_id))
@@ -47,16 +39,27 @@ async def update_tea_status(session: AsyncSession, order_id: int, new_status: Te
     return order
 
 
-async def cancel_tea_order(session: AsyncSession, order_id: int) -> Tea_make | None:
+async def cancel_tea_order(session: AsyncSession, order_id: int) -> Tea_make:
     order = await session.get(Tea_make, order_id)
-    if order:
-        if order.status in [TeaStatus.COMPLETED, TeaStatus.FAILED]:
-            return order
-        order.status = TeaStatus.CANCELLED
-        session.add(order)
-        await session.commit()
-        await session.refresh(order)
+
+    if not order:
+        raise ValueError("Order not found")
+
+    if order.status == 'completed':
+        raise ValueError("Cannot cancel already completed order")
+
+    if order.status == 'cancelled':
+        raise ValueError("Order is already cancelled")
+
+    if order.status == 'failed':
+        raise ValueError("Cannot cancel failed order")
+
+    order.status = 'cancelled'
+    await session.commit()
+    await session.refresh(order)
+
     return order
+
 
 async def dispense_tea(session: AsyncSession, order_id: int) -> Tea_make | str | None:
     order = await session.get(Tea_make, order_id)
