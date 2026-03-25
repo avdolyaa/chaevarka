@@ -6,6 +6,7 @@ from .endpoints.devices import router as devices_router
 from .endpoints.tea_make import router as tea_make_router
 from .endpoints.drums import router as drum_router
 from .endpoints.firmware import router as firmware_router
+from .endpoints.recipes import router as recipe_router
 from .endpoints.health import router as health_router
 from fastapi.security import HTTPBearer
 http_bearer = HTTPBearer(auto_error=False)
@@ -16,6 +17,7 @@ router.include_router(auth_router)
 router.include_router(users_router)
 router.include_router(devices_router)
 router.include_router(tea_make_router)
+router.include_router(recipe_router)
 router.include_router(drum_router)
 router.include_router(firmware_router)
 router.include_router(health_router)

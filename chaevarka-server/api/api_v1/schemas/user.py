@@ -5,11 +5,11 @@ from pydantic import ConfigDict, Field
 
 
 class UserRead(schemas.BaseUser[int]):
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    first_name: Optional[str] = Field(None, alias="firstName")
+    last_name: Optional[str] = Field(None, alias="lastName")
     phone: Optional[str] = None
-    profile_picture: Optional[str] = None
-    device_id: Optional[str] = None
+    profile_picture: Optional[str] = Field(None, alias="profilePicture")
+    device_id: Optional[str] = Field(None, alias="deviceId")
 
     model_config = ConfigDict(
         from_attributes=True,
@@ -18,13 +18,14 @@ class UserRead(schemas.BaseUser[int]):
 
 
 class UserCreate(schemas.BaseUserCreate):
-    first_name: str = Field(..., min_length=2)
-    last_name: str = Field(..., min_length=2)
+    first_name: str = Field(..., alias="firstName")
+    last_name: str = Field(..., alias="lastName")
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class UserUpdate(schemas.BaseUserUpdate):
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    first_name: Optional[str] = Field(None, alias="firstName")
+    last_name: Optional[str] = Field(None, alias="lastName")
     phone: Optional[str] = None
-    profile_picture: Optional[str] = None
-    device_id: Optional[str] = None
+    profile_picture: Optional[str] = Field(None, alias="profilePicture")
+    device_id: Optional[str] = Field(None, alias="deviceId")

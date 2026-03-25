@@ -3,17 +3,17 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 from datetime import datetime
-
 from api.dependencies.authentication.auth import current_active_user, current_superuser
 from core.config import settings
 from api.api_v1.schemas.tea_make import TeaMakeCreate, TeaMakeResponse, TeaStatusUpdate, TeaStatus
 from core.models import db_helper, Tea_make, Device
 from crud.tea_make import make_tea, get_tea, post_tea_ready, get_tea_ready, update_tea_status, cancel_tea_order, dispense_tea
 from sqlalchemy import select
+
+
 router = APIRouter(
    prefix=settings.api.prefix,
-   tags=["Tea_make"],
-   dependencies=[Depends(current_active_user)]
+   tags=["Tea_make"]
 )
 
 async def update_device_online(session: AsyncSession, device_id: str):
@@ -25,7 +25,7 @@ async def update_device_online(session: AsyncSession, device_id: str):
         device.online_at = datetime.utcnow()
         session.add(device)
 
-@router.post("/tea-make", response_model=dict)
+@router.post("/tea-make", response_model=dict, dependencies=[Depends(current_active_user)])
 async def post_tea_make(
        tea_make: TeaMakeCreate,
        session: AsyncSession = Depends(db_helper.session_getter)
@@ -115,7 +115,7 @@ async def get_order_by_id(
     return order
 
 
-@router.post("/tea-make/{order_id}/cancel", response_model=dict)
+@router.post("/tea-make/{order_id}/cancel", response_model=dict, dependencies=[Depends(current_active_user)])
 async def cancel_tea(
     order_id: int,
     session: AsyncSession = Depends(db_helper.session_getter)
@@ -140,7 +140,7 @@ async def cancel_tea(
     }
 
 
-@router.post("/{order_id}/dispense", response_model=dict)
+@router.post("/tea-make/{order_id}/dispense", response_model=dict, dependencies=[Depends(current_active_user)])
 async def dispense_tea_portion(
         order_id: int,
         session: AsyncSession = Depends(db_helper.session_getter)

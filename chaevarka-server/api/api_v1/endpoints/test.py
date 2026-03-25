@@ -12,7 +12,8 @@ router = APIRouter(
 
 @router.post("/test-data")
 async def test_data(session: AsyncSession = Depends(db_helper.session_getter)):
-    try:
+    ...
+    '''try:
         devices = [
             Device(device_id="chvrk_1", ip_address="192.168.1.100"),
             Device(device_id="chvrk_2", ip_address="192.168.1.101"),
@@ -42,3 +43,4 @@ async def test_data(session: AsyncSession = Depends(db_helper.session_getter)):
     except Exception as e:
         await session.rollback()
         return {"error": str(e)}
+    '''

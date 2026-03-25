@@ -11,11 +11,11 @@ from crud.recipe import get_all_public_recipes, get_my_recipes, crud_delete_reci
 
 router = APIRouter(
    prefix=settings.api.prefix,
-   tags=["Tea_make"],
+   tags=["Recipes"],
 )
 
 
-@router.get("/", response_model=List[RecipeResponse])
+@router.get("/recipes/", response_model=List[RecipeResponse])
 async def read_public_recipes(
         session: AsyncSession = Depends(db_helper.session_getter)
 ):
@@ -23,7 +23,7 @@ async def read_public_recipes(
     return recipes
 
 
-@router.get("/my", response_model=List[RecipeResponse])
+@router.get("/recipes/my", response_model=List[RecipeResponse])
 async def read_my_recipes(
         current_user=Depends(current_active_user),
         session: AsyncSession = Depends(db_helper.session_getter)
@@ -32,7 +32,7 @@ async def read_my_recipes(
     return recipes
 
 
-@router.post("/", response_model=RecipeResponse)
+@router.post("/recipes/", response_model=RecipeResponse)
 async def create_recipe(
         recipe_in: RecipeCreate,
         current_user=Depends(current_active_user),
@@ -42,7 +42,7 @@ async def create_recipe(
     return recipe
 
 
-@router.delete("/{recipe_id}")
+@router.delete("/recipes/{recipe_id}", dependencies=[Depends(current_active_user)])
 async def delete_recipe(
         recipe_id: int,
         current_user=Depends(current_active_user),
@@ -60,7 +60,7 @@ async def delete_recipe(
 
 
 
-@router.patch("/{recipe_id}", response_model=RecipeResponse)
+@router.patch("/recipes/{recipe_id}", response_model=RecipeResponse, dependencies=[Depends(current_active_user)])
 async def patch_recipe(
         recipe_id: int,
         recipe_update: RecipePatch,

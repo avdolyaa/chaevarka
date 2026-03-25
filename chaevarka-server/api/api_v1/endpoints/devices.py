@@ -11,7 +11,6 @@ from crud.devices import get_information, update_device_ip
 router = APIRouter(
     prefix=settings.api.prefix,
     tags=["Devices"],
-    dependencies=[Depends(current_active_user)]
 )
 
 
@@ -23,7 +22,7 @@ async def get_ip(device_id: str, session: AsyncSession = Depends(db_helper.sessi
     return DeviceResponse(ip_address=device.ip_address, device_id=device.device_id, online_at=device.online_at)
 
 
-@router.post("/devices", response_model=DeviceResponse)
+@router.post("/devices", response_model=DeviceResponse, dependencies=[Depends(current_active_user)])
 async def register_device(
     device_ip: DeviceCreate,
     session: AsyncSession = Depends(db_helper.session_getter)

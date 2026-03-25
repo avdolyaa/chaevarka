@@ -9,19 +9,19 @@ class RecipeBase(BaseModel):
     type: str = "black"
     icon: Optional[str] = None
 
-    waterAmount: Annotated[int, Field(ge=50, le=2000, alias="water_amount")]
+    water_amount: Annotated[int, Field(ge=50, le=2000, alias="waterAmount")]
     temperature: Annotated[int, Field(ge=70, le=100)]
     time: Annotated[int, Field(ge=0, le=5)]
-    teaAmount: Annotated[int, Field(ge=0, le=10, alias="tea_amount")]
+    tea_amount: Annotated[int, Field(ge=0, le=10, alias="teaAmount")]
 
-    drum1: int = Field(default=0, alias="drum_1")
-    drum2: int = Field(default=0, alias="drum_2")
-    drum3: int = Field(default=0, alias="drum_3")
-    drum4: int = Field(default=0, alias="drum_4")
-    drum5: int = Field(default=0, alias="drum_5")
-    drum6: int = Field(default=0, alias="drum_6")
+    drum_1: int = Field(default=0, alias="drum1")
+    drum_2: int = Field(default=0, alias="drum2")
+    drum_3: int = Field(default=0, alias="drum3")
+    drum_4: int = Field(default=0, alias="drum4")
+    drum_5: int = Field(default=0, alias="drum5")
+    drum_6: int = Field(default=0, alias="drum6")
 
-    isPublic: bool = Field(default=False, alias="is_public")
+    is_public: bool = Field(default=False, alias="isPublic")
 
 
 class RecipeCreate(RecipeBase):
@@ -35,22 +35,22 @@ class RecipePatch(BaseModel):
     type: Optional[str] = None
     icon: Optional[str] = None
 
-    waterAmount: Optional[Annotated[int, Field(ge=100, le=1000)]] = Field(None, alias="water_amount")
+    water_amount: Optional[Annotated[int, Field(ge=100, le=1000)]] = Field(None,  alias="waterAmount")
     temperature: Optional[Annotated[int, Field(ge=70, le=100)]] = None
     time: Optional[Annotated[int, Field(ge=0, le=5)]] = None
-    teaAmount: Optional[Annotated[int, Field(ge=0, le=10)]] = Field(None, alias="tea_amount")
+    tea_amount: Optional[Annotated[int, Field(ge=0, le=10)]] = Field(None, alias="teaAmount")
 
-    drum1: Optional[int] = Field(None, ge=0, le=100, alias="drum_1")
-    drum2: Optional[int] = Field(None, ge=0, le=100, alias="drum_2")
-    drum3: Optional[int] = Field(None, ge=0, le=100, alias="drum_3")
-    drum4: Optional[int] = Field(None, ge=0, le=100, alias="drum_4")
-    drum5: Optional[int] = Field(None, ge=0, le=100, alias="drum_5")
-    drum6: Optional[int] = Field(None, ge=0, le=100, alias="drum_6")
+    drum_1: Optional[int] = Field(None, ge=0, le=100, alias="drum1")
+    drum_2: Optional[int] = Field(None, ge=0, le=100, alias="drum2")
+    drum_3: Optional[int] = Field(None, ge=0, le=100, alias="drum3")
+    drum_4: Optional[int] = Field(None, ge=0, le=100, alias="drum4")
+    drum_5: Optional[int] = Field(None, ge=0, le=100, alias="drum5")
+    drum_6: Optional[int] = Field(None, ge=0, le=100, alias="drumv6")
 
     isPublic: Optional[bool] = Field(None, alias="is_public")
 
 
 class RecipeResponse(RecipeBase):
     id: int
-    userId: int = Field(alias="user_id")
+    user_id: int = Field(alias="userId")
     model_config = ConfigDict(from_attributes=True, populate_by_name=True)
