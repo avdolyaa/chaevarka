@@ -13,6 +13,9 @@ get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 default_email = settings.superuser_email
 default_password = settings.superuser_password
+default_first_name = settings.superuser_first_name
+default_last_name = settings.superuser_last_name
+default_phone = settings.superuser_phone
 default_is_active = True
 default_is_superuser = True
 default_is_verified = True
@@ -31,6 +34,9 @@ async def create_user(
 async def create_superuser(
         email: str = default_email,
         password: str = default_password,
+        first_name: str = default_first_name,
+        last_name: str = default_last_name,
+        phone: str = default_phone,
         is_active: bool = default_is_active,
         is_superuser: bool = default_is_superuser,
         is_verified: bool = default_is_verified,
@@ -38,6 +44,9 @@ async def create_superuser(
     user_create = UserCreate(
         email=email,
         password=password,
+        first_name=first_name,
+        last_name=last_name,
+        phone=phone,
         is_active=is_active,
         is_superuser=is_superuser,
         is_verified=is_verified,

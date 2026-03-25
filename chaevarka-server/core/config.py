@@ -35,5 +35,9 @@ class Settings(BaseSettings):
     access_token: AccessToken
     superuser_email: str
     superuser_password: str
+    superuser_first_name: str
+    superuser_last_name: str
+    superuser_phone: str
+
 
 settings = Settings()
