@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pydantic import BaseModel
 from pydantic import PostgresDsn
 from pydantic_settings import (
@@ -5,6 +7,8 @@ from pydantic_settings import (
     SettingsConfigDict,
 )
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class RunConfig(BaseModel):
