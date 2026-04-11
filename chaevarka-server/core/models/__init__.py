@@ -2,9 +2,19 @@ __all__= (
     "db_helper",
     "Base",
     "Device",
-    "Tea_make"
+    "Tea_make",
+    "User",
+    "AccessToken",
+    "Firmware",
+    "Drum_config",
+    "Recipe",
 )
 from .db_helper import db_helper
 from .base import Base
 from .tea_make import Tea_make
+from .tea_make import Drum_config
 from .device import Device
+from .user import User
+from .recipe import Recipe
+from .firmware import Firmware
+from .access_token import AccessToken

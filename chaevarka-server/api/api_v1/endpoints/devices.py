@@ -1,35 +1,37 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-from api.api_v1.schemas.device import DeviceIP
+from api.api_v1.schemas.device import DeviceResponse, DeviceCreate
+from api.dependencies.authentication.auth import current_active_user, current_superuser
 from core.config import settings
 from core.models import db_helper
-from crud.devices import get_ip_address, update_device_ip
+from crud.devices import get_information, update_device_ip
 
 
 router = APIRouter(
     prefix=settings.api.prefix,
-    tags=["Devices"]
+    tags=["Devices"],
 )
 
 
-@router.get("/devices/{device_id}", response_model=DeviceIP)
+@router.get("/devices/{device_id}", response_model=DeviceResponse)
 async def get_ip(device_id: str, session: AsyncSession = Depends(db_helper.session_getter)):
-    device = await get_ip_address(session=session, device_id=device_id)
+    device = await get_information(session=session, device_id=device_id)
     if not device:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Device not found")
-    return DeviceIP(ip_address=device.ip_address, device_id=device.device_id)
+    return DeviceResponse(ip_address=device.ip_address, device_id=device.device_id, online_at=device.online_at)
 
 
-@router.post("/devices", response_model=DeviceIP)
+@router.post("/devices", response_model=DeviceResponse, dependencies=[Depends(current_active_user)])
 async def register_device(
-    device_ip: DeviceIP,
+    device_ip: DeviceCreate,
     session: AsyncSession = Depends(db_helper.session_getter)
 ):
     device = await update_device_ip(session=session, ip_address=device_ip.ip_address, device_id=device_ip.device_id)
     return device
 
-@router.delete("/devices")
+
+@router.delete("/devices", dependencies=[Depends(current_superuser)])
 async def clear_all_devices(session: AsyncSession = Depends(db_helper.session_getter)):
     try:
         await session.execute(text("DELETE FROM devices"))
