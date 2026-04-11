@@ -21,7 +21,6 @@ async def send_verification_email(
 
         Please follow the link to verify your email:
         {verification_link}
-        {verification_token}
         Your site admin,
         © 2026.
         """

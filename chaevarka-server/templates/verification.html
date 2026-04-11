@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Подтверждение почты
+{% endblock %}
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center">
+    <div class="card shadow-sm p-4">
+      <div class="card-body">
+        {% if success %}
+          <div class="mb-4">
+            <h1 class="display-5 text-success">✅ Готово!</h1>
+          </div>
+          <p class="lead">
+            Почта <strong>{{ user.email }}</strong> успешно подтверждена.
+          </p>
+          <p class="text-muted">
+            Теперь вы можете вернуться в приложение «Чаеварка» и продолжить работу.
+          </p>
+        {% else %}
+          <div class="mb-4">
+            <h1 class="display-5 text-danger">❌ Ошибка</h1>
+          </div>
+          <p class="lead">{{ message }}</p>
+          <p class="text-muted">
+            Попробуйте запросить новое письмо из мобильного приложения.
+          </p>
+        {% endif %}
+
+        <hr class="my-4">
+        <div class="d-grid">
+          <button onclick="window.close()" class="btn btn-outline-secondary">
+            Закрыть окно
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

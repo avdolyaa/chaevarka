@@ -44,11 +44,13 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             user.id,
             token,
         )
-        verification_link = "http://localhost:8000/docs#/Auth/verify_verify_api_v1_auth_verify_post"
+        verification_link = request.url_for("verify-email").replace_query_params(
+            token=token
+        )
         self.background_tasks.add_task(
             send_verification_email,
             user=user,
-            verification_link=verification_link,
+            verification_link=str(verification_link),
             verification_token=token,
         )
 
@@ -75,7 +77,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             user.id,
             token,
         )
-        reset_link = "http://localhost:8000/docs#/Auth/reset_reset_password_api_v1_auth_reset_password_post"
+        reset_link = request.url_for("reset-password").replace_query_params(
+            token=token
+        )
 
         self.background_tasks.add_task(
             send_forgot_password_email,  # Твоя новая функция
