@@ -26,8 +26,6 @@ services:
       - TEA_RUN__PORT
       - TEA_DB__URL
       - TEA_DB__ECHO
-    volumes:
-      - ./chaevarka-server:/app
     networks:
       - backend_net
 
