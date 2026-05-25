@@ -65,6 +65,10 @@ services:
       - "5050:80"
     depends_on:
       - api
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    networks:
+      - backend_net
 
 networks:
   backend_net:
