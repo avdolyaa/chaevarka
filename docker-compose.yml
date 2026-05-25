@@ -5,9 +5,9 @@ services:
     image: postgres:16
     restart: unless-stopped
     environment:
-      POSTGRES_DB: "chaevarka"
-      POSTGRES_USER: "user"
-      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./db_data:/var/lib/postgresql/data
     mem_limit: 512m
@@ -26,6 +26,17 @@ services:
       - TEA_RUN__PORT
       - TEA_DB__URL
       - TEA_DB__ECHO
+      - TEA_RUN__HOST
+      - TEA_RUN__PORT
+      - TEA_DB__URL
+      - TEA_DB__ECHO
+      - TEA_ACCESS_TOKEN__RESET_PASSWORD_TOKEN_SECRET
+      - TEA_ACCESS_TOKEN__VERIFICATION_TOKEN_SECRET
+      - TEA_SUPERUSER_EMAIL
+      - TEA_SUPERUSER_PASSWORD
+      - TEA_SUPERUSER_FIRST_NAME
+      - TEA_SUPERUSER_LAST_NAME
+      - TEA_SUPERUSER_PHONE
     networks:
       - backend_net
 
@@ -44,6 +55,16 @@ services:
       driver: "json-file"
       options:
         max-size: "1m"
+
+
+  nginx:
+    build:
+      context: .
+      dockerfile: build-app/nginx/Dockerfile
+    ports:
+      - "5050:80"
+    depends_on:
+      - api
 
 networks:
   backend_net:
