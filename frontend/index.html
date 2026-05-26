@@ -20,6 +20,11 @@
                     <li><a href="#footer">Контакты</a></li>
                 </ul>
             </nav>
+            <button class="hamburger" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
@@ -98,7 +103,26 @@
                     <img src="img/image.png" alt="Платформа" class="social-placeholder ">
             </div>
         </div>
+    </div>
     </footer>
 
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-label', 'Открыть меню');
+            });
+        });
+    </script>
 </body>
 </html>

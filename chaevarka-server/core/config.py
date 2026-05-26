@@ -42,6 +42,7 @@ class Settings(BaseSettings):
     superuser_first_name: str
     superuser_last_name: str
     superuser_phone: str
+    docs_password: str = ""
 
 
 settings = Settings()

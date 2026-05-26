@@ -273,3 +273,208 @@ footer {
     height: 35px;
     border-radius: 4px;
 }
+
+/* =============================================
+   HAMBURGER BUTTON (скрыт на десктопе)
+   ============================================= */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background-color: var(--text-main);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* =============================================
+   TABLET  (≤ 1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+    .nav-links { gap: 20px; }
+
+    .hero {
+        background-image:
+            linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.15) 100%),
+            url('img/teavibe-machine.png');
+        background-size: cover;
+    }
+
+    .hero-content { max-width: 65%; }
+
+    .hero-content h1 { font-size: 36px; }
+
+    .features h2 { font-size: 30px; }
+
+    .business h2 { font-size: 32px; }
+
+    .feature-card {
+        width: calc(50% - 15px);
+        height: auto;
+        min-height: 220px;
+    }
+}
+
+/* =============================================
+   MOBILE  (≤ 768px)
+   ============================================= */
+@media (max-width: 768px) {
+    /* --- Header & Nav --- */
+    header { position: relative; }
+
+    .hamburger { display: flex; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
+        padding: 8px 0;
+        background-color: var(--white);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        z-index: 1000;
+        list-style: none;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links li { width: 100%; }
+
+    .nav-links a {
+        display: block;
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .nav-links li:last-child a { border-bottom: none; }
+
+    /* --- Hero --- */
+    .hero {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.78)),
+            url('img/teavibe-machine.png');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding: 50px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .hero-bold { font-size: 16px; }
+
+    .hero-content p:last-child { font-size: 15px; }
+
+    /* --- Features --- */
+    .features { padding: 55px 0 65px; }
+
+    .features h2 {
+        font-size: 24px;
+        margin-bottom: 35px;
+    }
+
+    .feature-card {
+        width: calc(50% - 15px);
+        height: auto;
+        min-height: 180px;
+    }
+
+    .big-text { font-size: 54px; }
+
+    /* --- Business --- */
+    .business { padding: 60px 0; }
+
+    .business h2 { font-size: 26px; }
+
+    .subtitle {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    /* --- Footer --- */
+    .footer-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+    .footer-right-group {
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 100%;
+        gap: 15px;
+    }
+
+    .footer-legal {
+        text-align: left;
+        max-width: 100%;
+    }
+}
+
+/* =============================================
+   SMALL MOBILE  (≤ 480px)
+   ============================================= */
+@media (max-width: 480px) {
+    .logo { font-size: 26px; }
+
+    .hero-content h1 { font-size: 22px; }
+
+    .hero-bold { font-size: 14px; }
+
+    .hero-content p:last-child { font-size: 14px; }
+
+    .yellow-divider { margin: 16px 0; }
+
+    .feature-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .features h2 { font-size: 20px; }
+
+    .features-grid .feature-card:nth-child(2) .card-icon,
+    .features-grid .feature-card:nth-child(3) .card-icon,
+    .features-grid .feature-card:nth-child(5) .card-icon {
+        height: 70px;
+    }
+
+    .business h2 { font-size: 21px; }
+
+    .subtitle { font-size: 14px; }
+
+    .business-item p { font-size: 14px; }
+}
