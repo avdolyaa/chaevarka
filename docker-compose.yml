@@ -62,7 +62,7 @@ services:
       context: .
       dockerfile: build-app/nginx/Dockerfile
     ports:
-      - "5050:80"
+      - "80:80"
     depends_on:
       - api
     volumes:
