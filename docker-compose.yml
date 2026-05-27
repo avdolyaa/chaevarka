@@ -21,22 +21,8 @@ services:
       - "8000:8000"
     container_name: api
     restart: unless-stopped
-    environment:
-      - TEA_RUN__HOST
-      - TEA_RUN__PORT
-      - TEA_DB__URL
-      - TEA_DB__ECHO
-      - TEA_RUN__HOST
-      - TEA_RUN__PORT
-      - TEA_DB__URL
-      - TEA_DB__ECHO
-      - TEA_ACCESS_TOKEN__RESET_PASSWORD_TOKEN_SECRET
-      - TEA_ACCESS_TOKEN__VERIFICATION_TOKEN_SECRET
-      - TEA_SUPERUSER_EMAIL
-      - TEA_SUPERUSER_PASSWORD
-      - TEA_SUPERUSER_FIRST_NAME
-      - TEA_SUPERUSER_LAST_NAME
-      - TEA_SUPERUSER_PHONE
+    env_file:
+      - .env
     networks:
       - backend_net
 
