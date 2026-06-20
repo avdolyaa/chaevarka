@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 54" fill="none">
+  <!-- центральная вертикаль вниз -->
+  <line x1="150" y1="0" x2="150" y2="22" stroke="#1C1C1C" stroke-width="2"/>
+  <!-- горизонтальная перекладина -->
+  <line x1="50" y1="22" x2="250" y2="22" stroke="#1C1C1C" stroke-width="2"/>
+  <!-- левая ветка -->
+  <line x1="50" y1="22" x2="50" y2="42" stroke="#1C1C1C" stroke-width="2"/>
+  <!-- центральная ветка -->
+  <line x1="150" y1="22" x2="150" y2="42" stroke="#1C1C1C" stroke-width="2"/>
+  <!-- правая ветка -->
+  <line x1="250" y1="22" x2="250" y2="42" stroke="#1C1C1C" stroke-width="2"/>
+  <!-- стрелка левая -->
+  <polygon points="43,42 50,54 57,42" fill="#1C1C1C"/>
+  <!-- стрелка центральная -->
+  <polygon points="143,42 150,54 157,42" fill="#1C1C1C"/>
+  <!-- стрелка правая -->
+  <polygon points="243,42 250,54 257,42" fill="#1C1C1C"/>
+</svg>

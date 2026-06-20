@@ -3,126 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeaVibe — Умная чаеварка для бизнеса</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <title>ТиВайб — Умная чаеварка для бизнеса</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="container header-flex">
-            <div class="logo">Tea<span>Vibe</span></div> 
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#features">Преимущества</a></li>
-                    <li><a href="#business">Бизнес-модель</a></li>
-                    <li><a href="#footer">Контакты</a></li>
-                </ul>
-            </nav>
-            <button class="hamburger" aria-label="Открыть меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+<!-- HEADER -->
+<header>
+    <div class="container header-flex">
+        <div class="logo">Ти<span>Вайб</span></div>
+        <a href="#contacts" class="btn-contact">Связаться с нами</a>
+    </div>
+</header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Знакомьтесь — чаеварка “TeaVibe”</h1>
-                <p class="hero-bold">Простыми словами, Чаеварка "TeaVibe" — аналог умной кофемашины, но для чая.</p>
-                <div class="yellow-divider"></div>
-                <p>Устройство позволяет любому человеку стабильно получать идеально приготовленный напиток за 2–4 минуты, независимо от навыков заваривания.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Почему чаеварка TeaVibe уникальна?</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <img src="img/icon-spoon.png" alt="Icon" class="card-icon">
-                    <p>Точное дозирование</p>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-left">
+            <h1>Чаеварка<br>"Ти<span class="accent-green">Вайб</span>"</h1>
+            <p class="hero-desc">Чаеварка "TeaVibe" — аналог умной кофемашины, но для чая</p>
+            <ul class="hero-list">
+                <li>Полностью автоматическое устройство</li>
+                <li>Не задействует персонал</li>
+            </ul>
+            <div class="hero-divider"></div>
+            <div class="hero-cards">
+                <div class="hero-card">
+                    <p class="hero-card-title">Клиенты</p>
+                    <p class="hero-card-text">Получают вкусный чай в пару нажатий</p>
                 </div>
-                <div class="feature-card">
-                    <img src="img/icon-settings.png" alt="Icon" class="card-icon">
-                    <p>Полная автоматизация процесса заваривания</p>
-                </div>
-                <div class="feature-card">
-                    <img src="img/icon-ingredients.png" alt="Icon" class="card-icon">
-                    <p>Поддержка 6 ингредиентов одновременно</p>
-                </div>
-                <div class="feature-card">
-                    <div class="big-text">2000+</div>
-                    <p>Вкусов напитков на выбор</p>
-                </div>
-                <div class="feature-card">
-                    <img src="img/icon-clean.png" alt="Icon" class="card-icon">
-                    <p>Автоматическая очистка системы</p>
+                <div class="hero-card">
+                    <p class="hero-card-title">Для бизнеса</p>
+                    <p class="hero-card-text">Дополнительная выручка и кросс-продажи</p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="business" class="business">
-        <div class="container">
-            <h2>Как TeaVibe улучшает показатели вашего бизнеса?</h2>
-            <p class="subtitle">Автоматическая чаеварка для бизнеса</p>
-
-            <div class="business-info">
-                <div class="business-item">
-                    <p><strong>Чай — это высокомаржинальный продукт.</strong><br>
-                    Установка точки в зоне потока (кассы, заправка, лобби) превращает ожидание в покупку.</p>
-                </div>
-
-                <div class="business-item">
-                    <p><strong>Время — деньги.</strong><br>
-                    Наша технология позволяет получить премиальный чай быстрее, чем его приготовит бариста.</p>
-                </div>
-            </div>
+        <div class="hero-right">
+            <img src="img/teavibe-machine.png" alt="TeaVibe machine" class="hero-machine">
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer id="footer">
-        <div class="container footer-wrapper">
-            <div class="footer-contacts">
-                <p class="footer-title">Контакты</p>
-                <p class="footer-email">teavibe.company@gmail.com</p>
-            </div>
-            
-            <div class="footer-right-group">
-                <p class="footer-legal">
-                    Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» мероприятия «Платформа университетского технологического предпринимательства» федерального проекта «Технологии»
-                </p>
-                <div class="footer-logos">
-                    <img src="img/fond-logo.png" alt="Фонд содействия" class="fond-img">
-                    <img src="img/image.png" alt="Платформа" class="social-placeholder ">
+<!-- CONTROL SECTION -->
+<section class="control-section">
+    <div class="control-green-bg"></div>
+    <h2 class="control-title">
+        Управление осуществляется через <span class="accent-green">сенсорный дисплей</span>
+    </h2>
+    <div class="control-media">
+        <div class="control-phone-col">
+            <img src="img/teavibe-app.png" alt="Мобильное приложение" class="control-phone-img">
+        </div>
+        <div class="control-display-col">
+            <img src="img/display.png" alt="Сенсорный дисплей" class="control-display-img">
+        </div>
+    </div>
+    <p class="control-app-label">А также через<br><span class="accent-green">мобильное приложение</span></p>
+    <div class="control-display-gradient"></div>
+</section>
+
+<!-- FEATURES + PATH -->
+<section id="features" class="features-path-section">
+    <img src="img/features-bg.png" class="features-bg-img" aria-hidden="true">
+    <div class="container features-path-grid">
+        <div class="features-col">
+            <h2>Уникальность чаеварки "Ти<span class="accent-green">Вайб</span>"</h2>
+            <ul class="features-list">
+                <li>
+                    <span class="feat-icon"><img src="img/icon-automation.png" alt=""></span>
+                    <span>Полная автоматизация процесса заваривания</span>
+                </li>
+                <li>
+                    <span class="feat-icon"><img src="img/icon-6ingredients.png" alt=""></span>
+                    <span>Поддержка 6 ингредиентов одновременно</span>
+                </li>
+                <li>
+                    <span class="feat-icon"><img src="img/icon-cleaning.png" alt=""></span>
+                    <span>Автоматическая очистка системы</span>
+                </li>
+                <li>
+                    <span class="feat-icon"><img src="img/icon-dosing.png" alt=""></span>
+                    <span>Точное дозирование</span>
+                </li>
+                <li>
+                    <span class="feat-big-num">2000+</span>
+                    <span>Вкусов напитков на выбор</span>
+                </li>
+            </ul>
+        </div>
+        <div class="path-center-arrow" aria-hidden="true">
+            <span class="path-arrow-line"></span>
+            <span class="path-arrow-head"></span>
+        </div>
+        <div class="path-col">
+            <h2>Как выглядит пользовательский путь</h2>
+            <div class="path-steps">
+                <div class="path-step">Клиент выбирает рецепт<br>на экране / в приложении</div>
+                <div class="path-step">Устройство автоматически дозирует ингредиенты, нагревает воду, заваривает</div>
+                <div class="path-step">Через 2–3 минуты готовый напиток в стакане</div>
+                <div class="path-step">Система автоматически промывается;<br>Готова к следующему использованию</div>
             </div>
         </div>
     </div>
-    </footer>
+</section>
 
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+<!-- ТЕХНИЧЕСКИЕ ОСОБЕННОСТИ -->
+<section class="tech-features-section">
+    <img src="img/features-bg.png" class="tech-bg-img" aria-hidden="true">
+    <div class="container tech-features-inner">
+        <h2 class="tech-features-title">Технические особенности</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <p class="tech-card-title">Система из 6 емкостей с ингредиентами</p>
+                <p class="tech-card-desc">Шесть независимых емкостей позволяют создавать сложные купажи и смешивать чай с добавками в один цикл.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Интеграция с системами умного дома/офиса</p>
+                <p class="tech-card-desc">Удобное приготовление чая через приложение, система совместима с умными станциями.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Встроенные рецепты заваривания</p>
+                <p class="tech-card-desc">Более 30 готовых рецептов для разных видов чая. Просто выберите напиток — устройство подберет идеальные параметры.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Автоматическая очистка</p>
+                <p class="tech-card-desc">Самопромывка после каждой чашки. Никакого смешивания вкусов и ручной мойки — всё автоматически.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Подключение к телеметрии</p>
+                <p class="tech-card-desc">Удаленный контроль через облако: отслеживайте остатки ингредиентов и продажи, обновляйте рецепты без выезда специалиста.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Гибкое заваривание</p>
+                <p class="tech-card-desc">Регулируйте температуру, состав напитка и время заваривания для идеального вкуса любого чая.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Точное дозирование ± 1 г</p>
+                <p class="tech-card-desc">Наши технологии дозирования гарантируют стабильный вкус каждой чашки и оптимальный расход ингредиентов.</p>
+            </div>
+            <div class="tech-card">
+                <p class="tech-card-title">Кипяток за 30 секунд</p>
+                <p class="tech-card-desc">Быстрый нагрев воды перед подачей. Свежий чай без лишнего ожидания даже в час пик.</p>
+            </div>
+            <p class="tech-more-text">Дальше —<br>больше!</p>
+        </div>
+    </div>
+</section>
 
-        hamburger.addEventListener('click', () => {
-            const isOpen = navLinks.classList.toggle('open');
-            hamburger.classList.toggle('active');
-            hamburger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
-        });
+<!-- REVENUE -->
+<section class="revenue-section">
+    <div class="container">
+        <h2>Как «ТиВайб» увеличивает выручку</h2>
+        <p class="section-sub">Автоматическая чаеварка для бизнеса</p>
+        <div class="revenue-grid">
+            <div class="revenue-text">
+                <div class="revenue-item">
+                    <h3 class="revenue-item-title">Раскрытие потенциала категории</h3>
+                    <p>Клиенты все чаще ищут альтернативу привычному пакетированному чаю в формате "to go"</p>
+                    <p>Чаеварка позволяет запустить продажи напитка, заваренного из листового чая в зонах с высоким трафиком, превращая скрытый спрос в стабильный поток высокомаржинальной выручки.</p>
+                </div>
+                <div class="revenue-item">
+                    <h3 class="revenue-item-title">Время — деньги.</h3>
+                    <p>Заваривание листового чая занимает слишком много времени для ритейла и АЗС. Наше устройство выдает напиток эталонного качества всего за 2–3 минуты, полностью исключая участие персонала.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('open');
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-label', 'Открыть меню');
-            });
-        });
-    </script>
+<!-- PROFIT -->
+<section class="profit-section">
+    <div class="container">
+        <div class="profit-header">
+            <h2>Откуда берётся <span class="accent-green">ваша выручка?</span></h2>
+            <div class="profit-calc-cta">
+                <a href="#contacts" class="profit-calc-btn">Рассчитать</a>
+                <svg class="profit-hint-arrow" width="34" height="46" viewBox="0 0 34 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 44 C30 30 10 28 14 6" stroke="#1C1C1C" stroke-width="2.6" stroke-linecap="round"/>
+                    <path d="M7 12 L14 6 L21 12" stroke="#1C1C1C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="profit-calc-hint">Воспользуйтесь нашим<br>калькулятором выручки</p>
+            </div>
+        </div>
+        <div class="profit-content">
+        <div class="profit-intro">
+            <p class="profit-intro-left">Наше устройство поможет получить дополнительную прибыль не только от продаж чая</p>
+            <p class="profit-intro-right">но и от <span class="accent-green">кросс-продаж</span></p>
+        </div>
+        <div class="profit-tables">
+            <div class="profit-table">
+                <div class="profit-row profit-row--header">
+                    <div class="profit-row-title-block">
+                        <span>EBITDA партнёра</span>
+                        <small>*при 50 кружках чая в день</small>
+                    </div>
+                    <span class="green-val profit-val-badge">≈ 95 000 руб/мес</span>
+                </div>
+                <div class="profit-row">
+                    <span>Цена за кружку</span>
+                    <span class="green-val profit-val-badge">≈ 120 руб/шт</span>
+                </div>
+                <div class="profit-sep"></div>
+                <div class="profit-cost-card">
+                    <div class="profit-row profit-row--sub-header">
+                        <span>Себестоимость кружки чая</span>
+                        <span class="profit-val-badge">≈ 20 руб</span>
+                    </div>
+                    <div class="profit-row profit-row--cost">
+                        <span>Стаканчик + крышка</span>
+                        <span>≈ 10 руб</span>
+                    </div>
+                    <div class="profit-row profit-row--cost">
+                        <span>Вода (250–300мл)</span>
+                        <span>≈ 1 руб</span>
+                    </div>
+                    <div class="profit-row profit-row--cost">
+                        <span>Чай (3–4г)</span>
+                        <span>≈ 9 руб</span>
+                    </div>
+                </div>
+                <p class="profit-footnote">*3000р за 1кг чая</p>
+            </div>
+            <div class="profit-table profit-table--cross">
+                <p class="cross-header-label">50 кружек в день</p>
+                <div class="cross-flow">
+                    <div class="cross-box">Каждая вторая кружка</div>
+                    <img src="img/cross-arrow.svg" class="cross-arrow-img" alt="">
+                    <div class="cross-items">
+                        <div class="cross-item">+ Выпечка<br><span class="green-val">≈ 150 руб</span></div>
+                        <div class="cross-item">+ Фаст-фуд<br><span class="green-val">≈ 300 руб</span></div>
+                        <div class="cross-item">+ Снеки<br><span class="green-val">≈ 130 руб</span></div>
+                    </div>
+                    <div class="cross-sum-row">
+                        <span class="cross-sum-label">Средний чек "к чаю"</span>
+                        <span class="green-val cross-sum-val">≈ 200 руб</span>
+                    </div>
+                    <div class="cross-hline"></div>
+                    <div class="cross-results">
+                        <div class="cross-result-col">
+                            <p class="cross-result-label">Выручка<br>за день</p>
+                            <p class="green-val">≈ 5 000 руб</p>
+                        </div>
+                        <div class="cross-result-col">
+                            <p class="cross-result-label">Выручка<br>за месяц</p>
+                            <p class="green-val">≈ 150 000 руб</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- /profit-content -->
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="achievements-section">
+    <img src="img/features-bg.png" class="achieve-bg-img" aria-hidden="true">
+    <div class="container">
+        <h2 class="ach-title">Чего мы добились?</h2>
+        <ul class="achievements-list">
+            <li>
+                <span class="ach-green-label">Стадия готовности – <span class="accent-green">MVP</span></span>
+            </li>
+            <li>Грант ФСИ "Студенческий Стартап": <span class="ach-amount">1 000 000 рублей</span></li>
+            <li>Грант МСП "Создай Наше": <span class="ach-amount">1 000 000 рублей</span></li>
+            <li>Получили статус <span class="accent-green" style="font-weight:800">МТК</span></li>
+            <li>Вошли в Реестр стартапов Москвы</li>
+        </ul>
+        <div class="achievements-bottom">
+            <div class="ach-bottom-group">
+                <p class="ach-group-title">Призёры и победители:</p>
+                <div class="ach-logos">
+                    <img src="img/prize-1.png" alt="" class="ach-logo">
+                    <img src="img/prize-2.png" alt="" class="ach-logo">
+                    <img src="img/prize-3.png" alt="" class="ach-logo">
+                    <img src="img/prize-4.png" alt="" class="ach-logo">
+                    <img src="img/prize-5.png" alt="" class="ach-logo">
+                    <img src="img/achievement-extra.png" alt="" class="ach-logo ach-logo--rounded">
+                </div>
+            </div>
+            <div class="ach-bottom-group">
+                <p class="ach-group-title">Резиденты:</p>
+                <div class="ach-logos">
+                    <img src="img/msu-sciencepark.png" alt="Научный парк МГУ" class="ach-logo ach-logo--bordered">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- МЫ ПРЕДЛАГАЕМ -->
+<section class="offers-section">
+    <div class="container">
+        <h2 class="offers-title">Мы предлагаем</h2>
+        <div class="offers-grid">
+            <div class="offers-col">
+                <h3 class="offers-col-title">Для ритейла и АЗС</h3>
+                <div class="offers-content">
+                    <p class="offers-model-label">Арендная модель продаж + %:</p>
+                    <p>Для АЗС и ритейла</p>
+                    <p>Аренда устройства (10 000 руб/мес)</p>
+                    <p>+ 25% с каждой кружки чая</p>
+                </div>
+            </div>
+            <div class="offers-col">
+                <h3 class="offers-col-title">Для офисов, ЖК, HoReCa<br>и бизнес-пространств</h3>
+                <div class="offers-content">
+                    <p>Индивидуальные условия</p>
+                    <p>Решение "под ключ"</p>
+                </div>
+                <div class="offers-cta-box">
+                    <p>Свяжитесь с нами, обсудим ваши задачи!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="contacts-section">
+    <div class="contacts-bg"></div>
+    <div class="container contacts-inner">
+        <div class="contacts-left">
+            <p class="contacts-cta-text">Остались вопросы?<br>Интересно сотрудничество?</p>
+            <p class="contacts-cta-action"><span class="accent-green">Напишите нам!</span></p>
+            <div class="contacts-col">
+                <p class="contacts-label">Наша почта:</p>
+                <a href="mailto:teavibe.company@gmail.com" class="contacts-value">teavibe.company@gmail.com</a>
+            </div>
+            <div class="contacts-col">
+                <p class="contacts-label">Наш канал в телеграмм:</p>
+                <a href="https://t.me/teamaker_tg" class="contacts-value">t.me/teamaker_tg</a>
+            </div>
+            <div class="contacts-qr-wrap">
+                <img src="img/qr-code.png" alt="QR-код" class="contacts-qr">
+            </div>
+        </div>
+        <div class="contacts-right">
+            <img src="img/machine.png" alt="" class="contacts-machine-img" aria-hidden="true">
+            <p class="calc-heading">Калькулятор продаж чая</p>
+            <div class="calc-cards">
+                <div class="calc-deco" aria-hidden="true">
+                    <div class="calc-deco-bar"></div>
+                    <div class="calc-deco-grid">
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                    </div>
+                </div>
+                <div class="calculator">
+                    <div class="calc-label-row">
+                        <label class="calc-label">Средний чек</label>
+                        <span class="calc-current-val"><span id="price-val">80</span> руб</span>
+                    </div>
+                    <div class="calc-slider-wrap">
+                        <span class="calc-bound">70</span>
+                        <input type="range" id="price-slider" min="70" max="300" value="80" class="calc-slider">
+                        <span class="calc-bound">300</span>
+                    </div>
+                </div>
+                <div class="calculator">
+                    <div class="calc-label-row">
+                        <label class="calc-label">Кружек в день</label>
+                        <span class="calc-current-val"><span id="cups-val">25</span> кружек</span>
+                    </div>
+                    <div class="calc-slider-wrap">
+                        <span class="calc-bound">20</span>
+                        <input type="range" id="cups-slider" min="20" max="100" value="25" class="calc-slider">
+                        <span class="calc-bound">100</span>
+                    </div>
+                    <button class="calc-btn" id="calc-btn">Рассчитать</button>
+                </div>
+            </div>
+            <div class="calc-result-bar">
+                <span class="calc-result-label">EBITDA за месяц ≈</span>
+                <span class="calc-result-val" id="ebitda-val"></span>
+            </div>
+            <div class="contacts-quote-banner">
+                <div class="contacts-quote-inner">
+                    <p>Качественный чай везде, где это нужно, с чаеваркой "ТиВайб"</p>
+                    <span>Команда "TeaVibe"</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+    <div class="container footer-wrap">
+        <div class="footer-left">
+            <p class="footer-company">ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ТИВАЙБ"</p>
+            <p class="footer-detail">ИНН: 9729409373 | ОГРН: 1257700458443 | КПП: 772901001</p>
+            <p class="footer-detail">119234, город Москва, тер Ленинские Горы, д. 1 стр. 77</p>
+            <p class="footer-disclaimer">Сайт носит исключительно информационный характер. ООО "ТИВАЙБ" не осуществляет сбор, обработку и хранение персональных данных посетителей на данном ресурсе.</p>
+        </div>
+        <div class="footer-right">
+            <p class="footer-legal">Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» мероприятия «Платформа университетского технологического предпринимательства» федерального проекта «Технологии»</p>
+            <div class="footer-logos">
+                <img src="img/fond-logo.png" alt="Фонд содействия" class="footer-logo-img">
+                <img src="img/image.png" alt="Платформа" class="footer-logo-img footer-logo-img--small">
+                <img src="img/fsi-logo2.png" alt="" class="footer-logo-img">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const priceSlider = document.getElementById('price-slider');
+    const cupsSlider  = document.getElementById('cups-slider');
+    const priceVal    = document.getElementById('price-val');
+    const cupsVal     = document.getElementById('cups-val');
+    const ebitdaVal   = document.getElementById('ebitda-val');
+    const calcBtn     = document.getElementById('calc-btn');
+
+    priceSlider.addEventListener('input', () => {
+        priceVal.textContent = priceSlider.value;
+    });
+    cupsSlider.addEventListener('input', () => {
+        cupsVal.textContent = cupsSlider.value;
+    });
+
+    calcBtn.addEventListener('click', () => {
+        const price  = parseInt(priceSlider.value);
+        const cups   = parseInt(cupsSlider.value);
+        const result = Math.max(0, Math.round(((price - 20) * cups * 30) * 0.75 - 10000));
+        ebitdaVal.textContent = result.toLocaleString('ru-RU') + ' руб';
+    });
+</script>
 </body>
 </html>
