@@ -1,7 +1,7 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import aiosmtplib
-
+from core.config import settings
 
 async def send_email(
     recipient: str,
@@ -9,9 +9,9 @@ async def send_email(
     plain_content: str,
     html_content: str = "",
 ):
-    admin_email = "admin@site.com"
+    admin_email = settings.smtp.from_email
     message = MIMEMultipart("alternative")
-    message["From"] = admin_email
+    message["From"] = settings.smtp.from_email
     message["To"] = recipient
     message["Subject"] = subject
 
@@ -30,6 +30,9 @@ async def send_email(
         message.attach(html_message)
     await aiosmtplib.send(
         message,
-        hostname="maildev",
-        port=1025,
+        hostname=settings.smtp.host,
+        port=settings.smtp.port,
+        username=settings.smtp.username or None,
+        password=settings.smtp.password or None,
+        use_tls=settings.smtp.use_tls,
     )

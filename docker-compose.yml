@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   pg:
     image: postgres:16
@@ -21,45 +19,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    networks:
-      - backend_net
-
-  maildev:
-    image: maildev/maildev
-    environment:
-      - TZ=Europe/Moscow
-      - MAILDEV_WEB_PORT=1080
-      - MAILDEV_SMTP_PORT=1025
-    networks:
-      - backend_net
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-
-
-  nginx:
-    build:
-      context: .
-      dockerfile: build-app/nginx/Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - api
-    volumes:
-      - ./frontend:/usr/share/nginx/html:ro
-      - ./certbot/conf:/etc/letsencrypt:ro
-      - ./certbot/www:/var/www/certbot:ro
-    networks:
-      - backend_net
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     networks:
       - backend_net
 

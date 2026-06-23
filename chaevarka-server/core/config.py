@@ -27,6 +27,21 @@ class AccessToken(BaseModel):
     reset_password_token_secret: str
     verification_token_secret: str
 
+class SuperuserConfig(BaseModel):
+    email: str
+    password: str
+    first_name: str
+    last_name: str
+    phone: str
+
+class SmtpConfig(BaseModel):
+    host: str = "maildev"
+    port: int = 1025
+    username: str = ""
+    password: str = ""
+    from_email: str = "noreply@teavibe.site"
+    use_tls: bool = False
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -37,12 +52,9 @@ class Settings(BaseSettings):
     db: DatabaseConfig
     api: ApiConfig = ApiConfig()
     access_token: AccessToken
-    superuser_email: str
-    superuser_password: str
-    superuser_first_name: str
-    superuser_last_name: str
-    superuser_phone: str
+    superuser: SuperuserConfig
     docs_password: str = ""
+    smtp: SmtpConfig = SmtpConfig()
 
 
 settings = Settings()
