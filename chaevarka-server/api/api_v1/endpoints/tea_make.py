@@ -70,7 +70,7 @@ async def tea_make_ready(
     if not tea_make:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
 
-    if tea_make.status != 'in_progress':
+    if tea_make.status in ('completed', 'cancelled', 'waiting'):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Order not in progress")
     tea_make.status = 'completed'
     session.add(tea_make)
