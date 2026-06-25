@@ -12,10 +12,6 @@ router = APIRouter(
     tags=["Users"]
 )
 
-router.include_router(
-    fastapi_users.get_users_router(UserRead, UserUpdate),
-    prefix="/users",
-)
 
 @router.delete("/users/me", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_me(
@@ -24,3 +20,8 @@ async def delete_me(
 ):
     await user_manager.delete(current_user)
 
+
+router.include_router(
+    fastapi_users.get_users_router(UserRead, UserUpdate),
+    prefix="/users",
+)
