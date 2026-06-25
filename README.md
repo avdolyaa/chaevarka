@@ -122,6 +122,56 @@ docker-compose exec api alembic upgrade head
 | GET | `/ping` | Проверка сервера |
 | GET | `/health` | Проверка сервера + БД |
 
+## Схема базы данных
+
+```
+users
+├── id (PK)
+├── email, hashed_password, is_active, is_verified
+├── first_name, last_name, phone, profile_picture
+└── device_id → FK → devices.device_id (SET NULL)
+
+devices
+├── id (PK)
+├── device_id (unique)
+├── ip_address
+└── online_at
+
+tea_make
+├── id (PK)
+├── device_id             — к какому устройству заказ
+├── status                — waiting → in_progress → completed
+├── water, water_for_cup, temperature, time, tea_cnt, type
+└── drum_1 … drum_6       — количество ингредиентов из каждого барабана
+
+drum_config
+├── id (PK)
+└── ingredient_name       — что насыпано в барабан (по позиции)
+
+recipes
+├── id (PK)
+├── user_id → FK → users.id (CASCADE)
+├── title, description, type, icon, is_public
+├── water_amount, temperature, time, tea_amount
+└── drum_1 … drum_6
+
+firmware
+├── id (PK)
+├── version (unique)
+├── device_prefix
+└── file_path
+
+accesstoken
+├── id (PK)
+├── token, created_at, expires_at
+└── user_id → FK → users.id (CASCADE)
+```
+
+**Связи:**
+- `users` → `devices`: много-к-одному (несколько пользователей могут использовать одно устройство)
+- `recipes` → `users`: много-к-одному (рецепты принадлежат пользователю, удаляются вместе с ним)
+- `accesstoken` → `users`: много-к-одному (у пользователя может быть несколько токенов)
+
 ## Логика заказа
 
 ```

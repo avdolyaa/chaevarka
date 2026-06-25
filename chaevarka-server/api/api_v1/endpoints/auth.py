@@ -9,6 +9,7 @@ router = APIRouter(
     prefix=settings.api.prefix,
     tags=["Auth"]
 )
+
 # костыль нужно верификацию добавить
 router.include_router(
     router=fastapi_users.get_auth_router(authentication_backend, requires_verification=False),
