@@ -58,69 +58,72 @@ docker-compose exec api alembic upgrade head
 
 Все эндпоинты с префиксом `/api/v1`.
 
+Обозначения: `—` публичный · `токен` Bearer-токен активного пользователя · `суперпользователь` только суперпользователь
+
 ### Auth
-| Метод | URL | Описание |
-|---|---|---|
-| POST | `/auth/login` | Получить токен доступа |
-| POST | `/auth/logout` | Выйти |
-| POST | `/auth/register` | Зарегистрироваться |
-| POST | `/auth/verify` | Подтвердить email |
-| POST | `/auth/forgot-password` | Запросить сброс пароля |
-| POST | `/auth/reset-password` | Сбросить пароль |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| POST | `/auth/login` | Получить токен доступа | — |
+| POST | `/auth/logout` | Выйти | токен |
+| POST | `/auth/register` | Зарегистрироваться | — |
+| POST | `/auth/verify` | Подтвердить email | — |
+| POST | `/auth/forgot-password` | Запросить сброс пароля | — |
+| POST | `/auth/reset-password` | Сбросить пароль | — |
 
 ### Users
-| Метод | URL | Описание |
-|---|---|---|
-| GET | `/users/me` | Получить текущего пользователя |
-| PATCH | `/users/me` | Обновить профиль |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| GET | `/users/me` | Получить текущего пользователя | токен |
+| PATCH | `/users/me` | Обновить профиль | токен |
+| DELETE | `/users/me` | Удалить аккаунт | токен |
 
 ### Devices
-| Метод | URL | Описание |
-|---|---|---|
-| GET | `/devices/{device_id}` | Получить устройство по ID |
-| POST | `/devices` | Зарегистрировать или обновить устройство |
-| DELETE | `/devices` | Удалить все устройства (суперпользователь) |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| GET | `/devices/{device_id}` | Получить устройство по ID | — |
+| POST | `/devices` | Зарегистрировать или обновить устройство | — |
+| DELETE | `/devices` | Удалить все устройства | суперпользователь |
 
 ### Tea Make (заказы)
-| Метод | URL | Описание |
-|---|---|---|
-| POST | `/tea-make` | Создать заказ |
-| GET | `/tea-make/{device_id}` | Забрать заказ (устройство) — меняет статус на `in_progress` |
-| GET | `/tea-make/order/{order_id}` | Получить заказ по ID |
-| GET | `/tea-make/{order_id}/status` | Статус заказа |
-| POST | `/tea-make/{order_id}/complete` | Завершить заказ |
-| POST | `/tea-make/{order_id}/cancel` | Отменить заказ |
-| POST | `/tea-make/{order_id}/dispense` | Выдать напиток |
-| PATCH | `/tea-make/{order_id}/status` | Изменить статус |
-| DELETE | `/tea-make` | Удалить все заказы (суперпользователь) |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| POST | `/tea-make` | Создать заказ | токен |
+| GET | `/tea-make/{device_id}` | Забрать заказ (устройство) — меняет статус на `in_progress` | — |
+| GET | `/tea-make/order/{order_id}` | Получить заказ по ID | — |
+| GET | `/tea-make/{order_id}/status` | Статус заказа | — |
+| POST | `/tea-make/{order_id}/complete` | Завершить заказ | — |
+| POST | `/tea-make/{order_id}/cancel` | Отменить заказ | токен |
+| POST | `/tea-make/{order_id}/dispense` | Выдать напиток | токен |
+| PATCH | `/tea-make/{order_id}/status` | Изменить статус | — |
+| DELETE | `/tea-make` | Удалить все заказы | суперпользователь |
 
 ### Recipes
-| Метод | URL | Описание |
-|---|---|---|
-| GET | `/recipes/` | Все рецепты |
-| GET | `/recipes/my` | Рецепты текущего пользователя |
-| POST | `/recipes/` | Создать рецепт |
-| PATCH | `/recipes/{recipe_id}` | Обновить рецепт |
-| DELETE | `/recipes/{recipe_id}` | Удалить рецепт |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| GET | `/recipes/` | Все рецепты | — |
+| GET | `/recipes/my` | Рецепты текущего пользователя | токен |
+| POST | `/recipes/` | Создать рецепт | токен |
+| PATCH | `/recipes/{recipe_id}` | Обновить рецепт | токен |
+| DELETE | `/recipes/{recipe_id}` | Удалить рецепт | токен |
 
 ### Drums
-| Метод | URL | Описание |
-|---|---|---|
-| GET | `/drums/config` | Конфигурация барабанов |
-| POST | `/drums/config` | Обновить конфигурацию (суперпользователь) |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| GET | `/drums/config` | Конфигурация барабанов | — |
+| POST | `/drums/config` | Обновить конфигурацию | суперпользователь |
 
 ### Firmware
-| Метод | URL | Описание |
-|---|---|---|
-| POST | `/upload` | Загрузить прошивку (суперпользователь) |
-| GET | `/devices/{device_id}/check-update` | Проверить наличие обновления |
-| GET | `/devices/firmware/download/{firmware_id}` | Скачать прошивку |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| POST | `/upload` | Загрузить прошивку | суперпользователь |
+| GET | `/devices/{device_id}/check-update` | Проверить наличие обновления | — |
+| GET | `/devices/firmware/download/{firmware_id}` | Скачать прошивку | — |
 
 ### Health
-| Метод | URL | Описание |
-|---|---|---|
-| GET | `/ping` | Проверка сервера |
-| GET | `/health` | Проверка сервера + БД |
+| Метод | URL | Описание | Авторизация |
+|---|---|---|---|
+| GET | `/ping` | Проверка сервера | — |
+| GET | `/health` | Проверка сервера + БД | — |
 
 ## Схема базы данных
 

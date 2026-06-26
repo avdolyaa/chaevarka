@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from api.api_v1.schemas.device import DeviceResponse, DeviceCreate
-from api.dependencies.authentication.auth import current_active_user, current_superuser
+from api.dependencies.authentication.auth import current_superuser
 from core.config import settings
 from core.models import db_helper
 from crud.devices import get_information, update_device_ip
@@ -22,7 +22,7 @@ async def get_ip(device_id: str, session: AsyncSession = Depends(db_helper.sessi
     return DeviceResponse(ip_address=device.ip_address, device_id=device.device_id, online_at=device.online_at)
 
 
-@router.post("/devices", response_model=DeviceResponse, dependencies=[Depends(current_active_user)])
+@router.post("/devices", response_model=DeviceResponse)
 async def register_device(
     device_ip: DeviceCreate,
     session: AsyncSession = Depends(db_helper.session_getter)
