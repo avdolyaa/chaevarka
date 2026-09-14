@@ -11,11 +11,11 @@ get_users_db_context = contextlib.asynccontextmanager(get_user_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 
-default_email = settings.superuser_email
-default_password = settings.superuser_password
-default_first_name = settings.superuser_first_name
-default_last_name = settings.superuser_last_name
-default_phone = settings.superuser_phone
+default_email = settings.superuser.email
+default_password = settings.superuser.password
+default_first_name = settings.superuser.first_name
+default_last_name = settings.superuser.last_name
+default_phone = settings.superuser.phone
 default_is_active = True
 default_is_superuser = True
 default_is_verified = True
