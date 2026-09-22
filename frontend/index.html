@@ -445,7 +445,7 @@
     calcBtn.addEventListener('click', () => {
         const price  = parseInt(priceSlider.value);
         const cups   = parseInt(cupsSlider.value);
-        const result = Math.max(0, Math.round(((price - 20) * cups * 30) * 0.75 - 10000));
+        const result = Math.max(0, Math.round(((price - price * 0.25 - 20) * cups * 30) - 10000));
         ebitdaVal.textContent = result.toLocaleString('ru-RU') + ' руб';
     });
 </script>
